@@ -1,0 +1,21 @@
+{
+    "name": "Hatsune Miku VA",
+    "version": "1.0.0",
+    "description": "Your virtual assistance, Miku",
+    "manifest_version": 3,
+    "author": "Lucas Franco",
+    "permissions": [
+        "tabs"
+    ],
+    "icons": {
+        "16": "miku_bread.png",
+        "32": "miku_bread.png",
+        "48": "miku_bread.png",
+        "128": "miku_bread.png"
+      },
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Hatsune Miku"
+    }
+    
+}

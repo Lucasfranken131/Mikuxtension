@@ -1,0 +1,51 @@
+body {
+    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#miku {
+    margin-top: 50px;
+}
+
+#miku-img {
+    border-radius: 50%;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #39b54a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #308041;
+}
+
+#dance {
+    margin-right: 10px;
+}
+
+#pan {
+    margin-right: 10px;
+}
+
+#gasolina {
+    margin-right: 10px;
+}
+
+#scream {
+    margin-right: 10px;
+}
+
+#scream:hover {
+    background-color: #e74c3c;
+}
