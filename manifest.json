@@ -5,14 +5,22 @@
     "manifest_version": 3,
     "author": "Lucas Franco",
     "permissions": [
-        "tabs"
+        "tabs",
+        "activeTab",
+        "scripting"
     ],
-    "icons": {
-        "16": "miku_bread.png",
-        "32": "miku_bread.png",
-        "48": "miku_bread.png",
-        "128": "miku_bread.png"
-      },
+    "content_scripts": [
+        {
+          "matches": ["http://*/*", "https://*/*"],
+          "js": ["mikuPage.js", "index.js", "popUp.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+          "resources": [ "./imgs/miku_character/miku_walking_right.gif.png" ],
+          "matches": [ "https://*/*" ]
+        }
+    ],    
     "action":{
         "default_popup": "index.html",
         "default_title": "Hatsune Miku"
