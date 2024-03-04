@@ -4,11 +4,6 @@
     "description": "Your virtual assistance, Miku",
     "manifest_version": 3,
     "author": "Lucas Franco",
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "scripting"
-    ],
     "content_scripts": [
         {
           "matches": ["http://*/*", "https://*/*"],
@@ -17,13 +12,17 @@
     ],
     "web_accessible_resources": [
         {
-          "resources": [ "./imgs/miku_character/miku_walking_right.gif.png" ],
-          "matches": [ "https://*/*" ]
+            "resources": ["imgs/miku_character/miku_walking_right.gif"],
+          "matches": ["<all_urls>"]
         }
     ],    
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "scripting"
+    ],
     "action":{
         "default_popup": "index.html",
         "default_title": "Hatsune Miku"
     }
-    
 }
