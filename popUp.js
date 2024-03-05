@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('walk').addEventListener('click', function() {
+    document.getElementById('walk').addEventListener('click', () => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            console.log("bosta")
             const tab = tabs[0];
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
