@@ -2,6 +2,7 @@ var mikuImg = null;
 var y = 500;
 var x = 1000;
 var direction = Math.floor(Math.random() * 4);
+firstTime = true;
 function createMiku() {
     mikuImg = document.createElement('img');
     mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
@@ -10,12 +11,26 @@ function createMiku() {
     document.body.appendChild(mikuImg);
 
     mikuImg.addEventListener('click', function() {
-        alert("Miku foi eliminada.");
-        document.body.removeChild(mikuImg);
-        mikuImg = null;
+        clearInterval(mikuMoving);
+        clearInterval(mikuMovingDirection);
+        if(direction == 1) {
+            mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_left.png');
+        }
+        else if(direction == 3) {
+            mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_right.png');
+        }
+        else {
+            mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_right.png');
+        }
+        setTimeout(function() {
+            alert("Miku foi eliminada.");
+            document.body.removeChild(mikuImg);
+            mikuImg = null;
+        }, 1000);
+        firstTime = false;
     });
-    setInterval(moveMiku, 10);
-    setInterval(changeDirection, 1000);
+    var mikuMoving = setInterval(moveMiku, 10);
+    var mikuMovingDirection = setInterval(changeDirection, 1000);
 
     function moveMiku() {
         if (x < window.screen.width - mikuImg.width && y < window.screen.height - mikuImg.height) {
@@ -38,27 +53,28 @@ function createMiku() {
         if(direction == 1) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_left.gif');
         }
-        if(direction == 3) {
+        else if(direction == 3) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
         }
+        return direction;
     }
 
     function mikuDirection() {
         if(direction == 0) {
             y -= 5
         }
-        if(direction == 1) {
+        else if(direction == 1) {
             x -= 5
         }
-        if(direction == 2) {
+        else if(direction == 2) {
             y += 5
         }
-        if(direction == 3) {
+        else if(direction == 3) {
             x += 5
         }
     }
 }
 
-if(!mikuImg) {
+if(!mikuImg && firstTime) {
     createMiku();
 }

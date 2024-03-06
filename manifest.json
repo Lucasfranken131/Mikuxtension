@@ -1,6 +1,6 @@
 {
     "name": "Hatsune Miku VA",
-    "version": "1.0.0",
+    "version": "1.3.1",
     "description": "Your virtual assistance, Miku",
     "manifest_version": 3,
     "author": "Lucas Franco",
@@ -12,7 +12,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["imgs/miku_character/miku_walking_right.gif", "imgs/miku_character/miku_walking_left.gif", "sounds/mikudayo.mp3"],
+            "resources": ["imgs/miku_character/miku_walking_right.gif", "imgs/miku_character/miku_walking_left.gif", "imgs/miku_character/miku_dead_left.png", "imgs/miku_character/miku_dead_right.png"],
           "matches": ["<all_urls>"]
         }
     ],    
