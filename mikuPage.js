@@ -1,7 +1,7 @@
 var mikuImg = null;
 var y = 500;
 var x = 1000;
-var direction = Math.floor(Math.random() * 4);
+var direction = Math.floor(Math.random() * 5);
 firstTime = true;
 function createMiku() {
     mikuImg = document.createElement('img');
@@ -40,7 +40,6 @@ function createMiku() {
             x = 500
             y = 500
         }
-
         x = Math.max(x, 0);
         y = Math.max(y, 0);
 
@@ -49,11 +48,14 @@ function createMiku() {
     }
 
     function changeDirection() {
-        direction = Math.floor(Math.random() * 4);
+        direction = Math.floor(Math.random() * 5);
         if(direction == 1) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_left.gif');
         }
-        else if(direction == 3) {
+        else if(direction == 4) {
+            mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_emoting.gif');
+        }
+        else {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
         }
         return direction;
