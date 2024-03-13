@@ -1,16 +1,18 @@
 var mikuImg = null;
+//Miku's original position
 var y = 500;
 var x = 1000;
-var direction = Math.floor(Math.random() * 5);
+var direction = Math.floor(Math.random() * 5);  //This variable is called once the 
 firstTime = true;
 function createMiku() {
     mikuImg = document.createElement('img');
     mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
     mikuImg.style.position = 'absolute';
+    document.body.appendChild(mikuImg); //Appends Miku to the page
 
-    document.body.appendChild(mikuImg);
-
+    //Miku killer function, removes the image and unables the function createMiku()
     mikuImg.addEventListener('click', function() {
+        //Kills the timers, so they won't be called anymore
         clearInterval(mikuMoving);
         clearInterval(mikuMovingDirection);
         if(direction == 1) {
@@ -29,9 +31,12 @@ function createMiku() {
         }, 1000);
         firstTime = false;
     });
+
+    //Timers to animate Miku and change the direction which she is moving
     var mikuMoving = setInterval(moveMiku, 10);
     var mikuMovingDirection = setInterval(changeDirection, 1000);
 
+    //Function to move Miku through the page
     function moveMiku() {
         if (x < window.screen.width - mikuImg.width && y < window.screen.height - mikuImg.height) {
             mikuDirection();
@@ -77,6 +82,7 @@ function createMiku() {
     }
 }
 
+//Checks if is the first time Miku is called, if not, calls createMiku();
 if(!mikuImg && firstTime) {
     createMiku();
 }

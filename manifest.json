@@ -7,7 +7,7 @@
     "content_scripts": [
         {
           "matches": ["http://*/*", "https://*/*"],
-          "js": ["mikuPage.js", "index.js", "popUp.js"]
+          "js": ["mikuPage.js", "index.js"]
         }
     ],
     "web_accessible_resources": [

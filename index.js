@@ -1,3 +1,4 @@
+//Creates a listener to the page and the buttons
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("miku").addEventListener("click", mikudayo);
     document.getElementById("dance").addEventListener("click", dance);
@@ -5,16 +6,17 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("gasolina").addEventListener("click", gasolina);
     document.getElementById("scream").addEventListener("click", scream);
     var miku = document.getElementById('miku-img');
-    var isBusy = false;
+    var isBusy = false; //Variable made to verify if Miku is doing something or not
     var audio = null;
 
+    //Resets to the original image
     function reiniciarImagem() {
         miku.src = "./imgs/miku_standing.png"
         isBusy = false;
     }
 
+    //This function and onwards are functions called by the buttons on the page
     function mikudayo() {
-        
         if(!isBusy) { 
             if(audio) {
                 audio.pause();
@@ -27,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(reiniciarImagem, 1500)
         }
     }
-
     function dance() {
         if(!isBusy) {
             if(audio) {
