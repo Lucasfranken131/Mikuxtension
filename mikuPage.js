@@ -2,7 +2,9 @@ var mikuImg = null;
 //Miku's original position
 var y = 500;
 var x = 1000;
-var direction = Math.floor(Math.random() * 5);  //This variable is called once the 
+var speed = 5
+var diagonalSpeed = speed - 1.5
+var direction = Math.floor(Math.random() * 10);  //This variable is called once
 firstTime = true;
 function createMiku() {
     mikuImg = document.createElement('img');
@@ -15,11 +17,8 @@ function createMiku() {
         //Kills the timers, so they won't be called anymore
         clearInterval(mikuMoving);
         clearInterval(mikuMovingDirection);
-        if(direction == 1) {
+        if(direction == 1 || direction == 4 || direction == 6) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_left.png');
-        }
-        else if(direction == 3) {
-            mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_right.png');
         }
         else {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_dead_right.png');
@@ -53,31 +52,47 @@ function createMiku() {
     }
 
     function changeDirection() {
-        direction = Math.floor(Math.random() * 5);
-        if(direction == 1) {
+        direction = Math.floor(Math.random() * 10);
+        if(direction == 1 || direction == 4 || direction == 6) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_left.gif');
         }
-        else if(direction == 4) {
+        else if(direction == 8 || direction == 9) {
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_emoting.gif');
         }
-        else {
+        else if(direction == 3 || direction == 5 || direction == 7){
             mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
         }
         return direction;
     }
 
     function mikuDirection() {
-        if(direction == 0) {
-            y -= 5
+        if(direction == 0) { //cima
+            y -= speed
         }
-        else if(direction == 1) {
-            x -= 5
+        if(direction == 1) { //esquerda
+            x -= speed
         }
-        else if(direction == 2) {
-            y += 5
+        if(direction == 2) { //baixo
+            y += speed
         }
-        else if(direction == 3) {
-            x += 5
+        if(direction == 3) { // direita
+            x += speed
+        }
+        if(direction == 4) { // cima esquerda
+            y -= diagonalSpeed
+            x -= diagonalSpeed
+        }
+        if(direction == 5) { // cima direita
+            y -= diagonalSpeed
+            x -= diagonalSpeed
+        }
+        if(direction == 6) { // baixo esquerda
+            y += diagonalSpeed
+            x -= diagonalSpeed
+        }
+        if(direction == 7) { // baixo direita
+            y += diagonalSpeed
+            x += diagonalSpeed
         }
     }
 }
