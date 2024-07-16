@@ -22,6 +22,7 @@ function createMiku() {
 
     //Miku killer function, removes the image and unables the function createMiku()
     // mikuImg.addEventListener('click', function() {
+
         //Kills the timers, so they won't be called anymore
     function killMiku() {
         clearInterval(mikuMoving);
@@ -58,6 +59,10 @@ function createMiku() {
 
         mikuImg.style.top = y + 'px';
         mikuImg.style.left = x + 'px';
+        var distance = getDistanceBetween(x, y, playerX, playerY);
+        if(distance <= 70) {
+            killMiku();
+        }
     }
 
     function changeDirection() {
@@ -155,7 +160,7 @@ function createPlayer() {
 }
 
 function getDistanceBetween(x1, y1, x2, y2) {
-    distance = math.sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2);
+    distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     return distance;
 }
 
@@ -163,9 +168,4 @@ function getDistanceBetween(x1, y1, x2, y2) {
 if(!mikuImg && firstTime) {
     createPlayer();
     createMiku()
-
-    var distance = getDistanceBetween(x, y, playerX, playerY);
-    if(distance <= 78) {
-        killMiku();
-    }
 }
