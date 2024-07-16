@@ -2,10 +2,18 @@ var mikuImg = null;
 //Miku's original position
 var y = 500;
 var x = 1000;
-var speed = 5
-var diagonalSpeed = speed - 1.5
+var speed = 5;
+var diagonalSpeed = speed - 1.5;
 var direction = Math.floor(Math.random() * 10);  //This variable is called once
 firstTime = true;
+
+var playerImg = null;
+var playerY = 200;
+var playerX = 500;
+var playerSpeed = 15;
+var playerDirection;
+var keysPressed = {};
+
 function createMiku() {
     mikuImg = document.createElement('img');
     mikuImg.src = chrome.runtime.getURL('./imgs/miku_character/miku_walking_right.gif');
@@ -13,8 +21,9 @@ function createMiku() {
     document.body.appendChild(mikuImg); //Appends Miku to the page
 
     //Miku killer function, removes the image and unables the function createMiku()
-    mikuImg.addEventListener('click', function() {
+    // mikuImg.addEventListener('click', function() {
         //Kills the timers, so they won't be called anymore
+    function killMiku() {
         clearInterval(mikuMoving);
         clearInterval(mikuMovingDirection);
         if(direction == 1 || direction == 4 || direction == 6) {
@@ -29,7 +38,7 @@ function createMiku() {
             mikuImg = null;
         }, 1000);
         firstTime = false;
-    });
+    };
 
     //Timers to animate Miku and change the direction which she is moving
     var mikuMoving = setInterval(moveMiku, 10);
@@ -97,7 +106,66 @@ function createMiku() {
     }
 }
 
+function createPlayer() {
+    playerImg = document.createElement('img');
+    playerImg.src = chrome.runtime.getURL('./imgs/len_player/len_standing_right.png');
+    playerImg.style.position = 'absolute';
+    document.body.appendChild(playerImg); //Appends the player to the page
+
+    function movePlayer() {
+        playerX = Math.max(playerX, 0);
+        playerY = Math.max(playerY, 0);
+
+        playerImg.style.top = playerY + 'px';
+        playerImg.style.left = playerX + 'px';
+    }
+
+    function handleMovement() {
+        if (keysPressed["w"]) {
+            playerY -= playerSpeed;
+        }
+        if (keysPressed["a"]) {
+            if(playerDirection != "left") {
+                playerImg.src = chrome.runtime.getURL('/imgs/len_player/len_left.gif');
+            }
+            playerDirection = "left";
+            playerX -= playerSpeed;
+        }
+        if (keysPressed["s"]) {
+            playerY += playerSpeed;
+        }
+        if (keysPressed["d"]) {
+            if(playerDirection != "right") {
+                playerImg.src = chrome.runtime.getURL('/imgs/len_player/len_right.gif');
+            }
+            playerDirection = "right";
+            playerX += playerSpeed;
+        }
+        movePlayer();
+    }
+
+    document.addEventListener("keydown", function(event) {
+        keysPressed[event.key] = true;
+        handleMovement();
+    });
+
+    document.addEventListener("keyup", function(event) {
+        keysPressed[event.key] = false;
+    });
+}
+
+function getDistanceBetween(x1, y1, x2, y2) {
+    distance = math.sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2);
+    return distance;
+}
+
 //Checks if is the first time Miku is called, if not, calls createMiku();
 if(!mikuImg && firstTime) {
-    createMiku();
+    createPlayer();
+    createMiku()
+
+    var distance = getDistanceBetween(x, y, playerX, playerY);
+    if(distance <= 78) {
+        killMiku();
+    }
 }

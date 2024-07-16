@@ -12,7 +12,17 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["imgs/miku_character/miku_walking_right.gif", "imgs/miku_character/miku_walking_left.gif", "imgs/miku_character/miku_dead_left.png", "imgs/miku_character/miku_dead_right.png", "imgs/miku_character/miku_emoting.gif"],
+            "resources": [
+             "imgs/miku_character/miku_walking_right.gif",
+             "imgs/miku_character/miku_walking_left.gif", 
+             "imgs/miku_character/miku_dead_left.png", 
+             "imgs/miku_character/miku_dead_right.png", 
+             "imgs/miku_character/miku_emoting.gif",
+             "imgs/len_player/len_left.gif",
+             "imgs/len_player/len_right.gif",
+             "imgs/len_player/len_standing_left.png",
+             "imgs/len_player/len_standing_right.png"
+            ], 
           "matches": ["<all_urls>"]
         }
     ],    
